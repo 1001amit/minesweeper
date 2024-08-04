@@ -7,7 +7,7 @@ class StartMenu:
         self.master = master
         self.master.title("Minesweeper - Start Menu")
         self.difficulty = "Medium"
-        self.theme = "Light"
+        self.theme = "Dark"
         
         self.create_widgets()
 
@@ -26,15 +26,6 @@ class StartMenu:
         tk.Radiobutton(self.difficulty_frame, text="Hard", variable=self.difficulty_var, value="Hard", font=("Helvetica", 12)).pack(side=tk.LEFT)
         tk.Radiobutton(self.difficulty_frame, text="Custom", variable=self.difficulty_var, value="Custom", font=("Helvetica", 12)).pack(side=tk.LEFT)
 
-        self.theme_frame = tk.Frame(self.master)
-        self.theme_frame.pack(pady=10)
-
-        self.theme_var = tk.StringVar()
-        self.theme_var.set("Light")
-
-        tk.Radiobutton(self.theme_frame, text="Light Theme", variable=self.theme_var, value="Light", font=("Helvetica", 12)).pack(side=tk.LEFT)
-        tk.Radiobutton(self.theme_frame, text="Dark Theme", variable=self.theme_var, value="Dark", font=("Helvetica", 12)).pack(side=tk.LEFT)
-
         self.start_button = tk.Button(self.master, text="Start Game", command=self.start_game, font=("Helvetica", 14), bg="green", fg="white")
         self.start_button.pack(pady=20)
 
@@ -43,7 +34,6 @@ class StartMenu:
 
     def start_game(self):
         self.difficulty = self.difficulty_var.get()
-        self.theme = self.theme_var.get()
         if self.difficulty == "Custom":
             self.show_custom_difficulty_window()
         else:
@@ -144,14 +134,9 @@ class MinesweeperGame:
         self.calculate_adjacent_mines()
 
     def set_theme(self):
-        if self.theme == "Light":
-            self.bg_color = "SystemButtonFace"
-            self.fg_color = "black"
-            self.button_color = "light gray"
-        elif self.theme == "Dark":
-            self.bg_color = "black"
-            self.fg_color = "white"
-            self.button_color = "gray"
+        self.bg_color = "black"
+        self.fg_color = "white"
+        self.button_color = "gray"
         self.master.configure(bg=self.bg_color)
 
     def set_difficulty(self, difficulty, custom_rows, custom_cols, custom_mines):
